@@ -1,17 +1,18 @@
+let buffer="0";
 function buttonClick(value){
     if (isNaN(parseInt(value))){
         handleSymbol(value);
     }else {
         handleNumber(value);
     }
+    reRender();
 }
 function handleSymbol(value) {
     switch (value) {
         case 'c' :
-            alert("c pressed");
+            buffer = "0"
             break;
         case '*' :
-            alert("* pressed");
             break;
         case '-' :
             alert("- pressed");
@@ -23,10 +24,17 @@ function handleSymbol(value) {
     console.log("symbol");
 }
 function handleNumber(value){
-    console.log("number");
+    if (buffer ==="0") {
+        buffer = value ;
+    }else{
+        buffer +=value;
+    }
 }
 
+function reRender(){
+    document.querySelector(".screen").innerText= buffer ;
 
+}
 
 function init(){
 console.log("hi")
