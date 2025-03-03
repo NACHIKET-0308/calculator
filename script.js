@@ -6,6 +6,20 @@ function buttonClick(value){
     }
 }
 function handleSymbol(value) {
+    switch (value) {
+        case 'c' :
+            alert("c pressed");
+            break;
+        case '*' :
+            alert("* pressed");
+            break;
+        case '-' :
+            alert("- pressed");
+            break;
+        case '+'  :
+            alert("+ pressed");
+            break;
+    }
     console.log("symbol");
 }
 function handleNumber(value){
