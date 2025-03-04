@@ -1,5 +1,6 @@
 let runningTotal=0;
 let buffer="0";
+let previousOperator ;
 function buttonClick(value){
     if (isNaN(parseInt(value))){
         handleSymbol(value);
@@ -20,12 +21,21 @@ function handleSymbol(value) {
         case '-' :
         case '+' :
         case '/' :
-            handdleMATH();
+            handdleMATH(value);
             break;
     }
     console.log("symbol");
 }
-
+function handleEqualsto(){
+    if( previousOperator === null){
+        return;
+    }else{
+        flushOperation(parseInt(buffer));
+        previousOperator = null;
+        buffer = runningTotal;
+        runningTotal= 0;
+    }
+}
 function handdleMATH(value){
     if (buffer === "0" ){
        return;
@@ -39,6 +49,17 @@ function handdleMATH(value){
         buffer = "0"
     }
 
+}
+function flushOperation(intBuffer) {
+    if (previousOperator === "+"){
+        runningTotal += intBuffer;
+    } else if( previousOperator === "-"){
+        runningTotal -= intBuffer;
+    }else if( previousOperator === "*"){
+        runningTotal *= intBuffer;
+    }else{
+        runningTotal /= intBuffer;
+    }
 }
 function handleNumber(value){
     if (buffer ==="0") {
@@ -58,6 +79,7 @@ console.log("hi")
 document
 .querySelector(".calc-buttons")
 .addEventListener("click",function(event){
+    
     buttonClick(event.target.innerText);
     
 });
