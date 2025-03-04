@@ -75,13 +75,11 @@ function reRender(){
 }
 
 function init(){
-console.log("hi")
 document
 .querySelector(".calc-buttons")
 .addEventListener("click",function(event){
     if (event.target.tagName === "BUTTON") {
-        console.log("Button Clicked: ");
-            buttonClick(event.target.innerText);
+        buttonClick(event.target.innerText);
       } else {
         console.log("Clicked outside the button or on empty space");
       }
