@@ -11,7 +11,7 @@ function buttonClick(value){
         forNumber(value);
         console.log("number handling");
     }
-    reRender();
+    screeninput();
 }
 function forSYMBOL(value) {
     switch (value) {
@@ -89,7 +89,7 @@ function forNumber(value){
     }
 }
 
-function reRender(){
+function screeninput(){
     document.querySelector(".screen").innerText= BUFfer ;
 
 }
