@@ -1,11 +1,15 @@
 let runningTotal=0;
 let buffer="0";
 let previousOperator ;
+let lastOperationEquals = false;
 function buttonClick(value){
+    
     if (isNaN(parseInt(value))){
+        
         handleSymbol(value);
     }else {
         handleNumber(value);
+        
     }
     reRender();
 }
@@ -13,14 +17,25 @@ function handleSymbol(value) {
     switch (value) {
         case 'c' :
             buffer = "0"
-            break;
+            lastOperationEquals = false;
+            break; 
+        case '←':
+            if (buffer.length === 1) {
+                buffer = "0";
+              } else {
+                buffer = buffer.substring(0, buffer.length - 1);
+              }
+              lastOperationEquals = false;  
+              break;
         case '=' :
             handleEqualsto();
+            lastOperationEquals = true;
             break;
         case '*' :
         case '-' :
         case '+' :
         case '/' :
+            lastOperationEquals = false;
             handdleMATH(value);
             break;
     }
@@ -62,9 +77,14 @@ function flushOperation(intBuffer) {
     }
 }
 function handleNumber(value){
+    if( lastOperationEquals=== true){
+        buffer = "0";
+    }
     if (buffer ==="0") {
         buffer = value ;
+        lastOperationEquals =false;
     }else{
+        lastOperationEquals = false;
         buffer +=value;
     }
 }
