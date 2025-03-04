@@ -23,7 +23,7 @@ function forSYMBOL(value) {
             if (BUFfer.length === 1) {
                 BUFfer = "0";
               } else {
-                BUFfer = BUFfer.substring(0, BUFfer.length - 1);
+                BUFfer = BUFfer.slice(0, BUFfer.length - 1);
               }
               lastOperationEquals = false;  
               break;
