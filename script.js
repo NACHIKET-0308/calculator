@@ -79,8 +79,13 @@ console.log("hi")
 document
 .querySelector(".calc-buttons")
 .addEventListener("click",function(event){
-    
-    buttonClick(event.target.innerText);
+    if (event.target.tagName === "BUTTON") {
+        console.log("Button Clicked: ");
+            buttonClick(event.target.innerText);
+      } else {
+        console.log("Clicked outside the button or on empty space");
+      }
+   
     
 });
 }
