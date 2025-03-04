@@ -1,29 +1,29 @@
-let runningTotal=0;
-let buffer="0";
+let totalBuffer=0;
+let BUFfer="0";
 let previousOperator ;
-let lastOperationEquals = false;
+let lastOperationEquals = false; // this will make sure that entering any number just after a calculation resets the calcultor screen and BUFfer 
 function buttonClick(value){
     
     if (isNaN(parseInt(value))){
-        
-        handleSymbol(value);
+        forSYMBOL(value);
+        console.log("symbol handling");
     }else {
-        handleNumber(value);
-        
+        forNumber(value);
+        console.log("number handling");
     }
     reRender();
 }
-function handleSymbol(value) {
+function forSYMBOL(value) {
     switch (value) {
         case 'c' :
-            buffer = "0"
+            BUFfer = "0"
             lastOperationEquals = false;
             break; 
         case '←':
-            if (buffer.length === 1) {
-                buffer = "0";
+            if (BUFfer.length === 1) {
+                BUFfer = "0";
               } else {
-                buffer = buffer.substring(0, buffer.length - 1);
+                BUFfer = BUFfer.substring(0, BUFfer.length - 1);
               }
               lastOperationEquals = false;  
               break;
@@ -39,58 +39,58 @@ function handleSymbol(value) {
             handdleMATH(value);
             break;
     }
-    console.log("symbol");
 }
 function handleEqualsto(){
+    //dedicated fucntion for equals to sign
     if( previousOperator === null){
         return;
     }else{
-        flushOperation(parseInt(buffer));
+        mathHandling(parseInt(BUFfer));
         previousOperator = null;
-        buffer = runningTotal;
-        runningTotal= 0;
+        BUFfer = totalBuffer;
+        totalBuffer= 0;
     }
 }
 function handdleMATH(value){
-    if (buffer === "0" ){
+    if (BUFfer === "0" ){
        return;
     }else {
-        const intBuffer = parseInt(buffer);
-        if (runningTotal===0){
-            runningTotal=intBuffer;
+        const intBUFfer = parseInt(BUFfer);
+        if (totalBuffer===0){
+            totalBuffer=intBUFfer;
         }else{
-            flushOperation(intBuffer);
+            mathHandling(intBUFfer);
         } previousOperator=value;
-        buffer = "0"
+        BUFfer = "0"
     }
 
 }
-function flushOperation(intBuffer) {
+function mathHandling(intBUFfer) {
     if (previousOperator === "+"){
-        runningTotal += intBuffer;
+        totalBuffer += intBUFfer;
     } else if( previousOperator === "-"){
-        runningTotal -= intBuffer;
+        totalBuffer -= intBUFfer;
     }else if( previousOperator === "*"){
-        runningTotal *= intBuffer;
+        totalBuffer *= intBUFfer;
     }else{
-        runningTotal /= intBuffer;
+        totalBuffer /= intBUFfer;
     }
 }
-function handleNumber(value){
+function forNumber(value){
     if( lastOperationEquals=== true){
-        buffer = "0";
+        BUFfer = "0";
     }
-    if (buffer ==="0") {
-        buffer = value ;
+    if (BUFfer ==="0") {
+        BUFfer = value ;
         lastOperationEquals =false;
     }else{
         lastOperationEquals = false;
-        buffer +=value;
+        BUFfer +=value;
     }
 }
 
 function reRender(){
-    document.querySelector(".screen").innerText= buffer ;
+    document.querySelector(".screen").innerText= BUFfer ;
 
 }
 
