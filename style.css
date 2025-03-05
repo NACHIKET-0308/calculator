@@ -13,7 +13,7 @@
     color: white;
   }
   
-  .screen {
+  .screen ,.screen-a{
     color: white;
     font-size: 40px;
     font-family: "Courier New", Courier, monospace;
