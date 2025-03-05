@@ -20,6 +20,7 @@ function forSYMBOL(value) {
             lastOperationEquals = false;
             break; 
         case '←':
+            BUFfer = BUFfer.toString();
             if (BUFfer.length === 1) {
                 BUFfer = "0";
               } else {
