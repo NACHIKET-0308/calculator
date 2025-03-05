@@ -1,4 +1,5 @@
 let totalBuffer=0;
+let newBUFfer="";
 let BUFfer="0";
 let previousOperator ;
 let lastOperationEquals = false; // this will make sure that entering any number just after a calculation resets the calcultor screen and BUFfer 
@@ -14,11 +15,14 @@ function buttonClick(value){
     screeninput();
 }
 function forSYMBOL(value) {
+    
     switch (value) {
         case 'c' :
             BUFfer = "0"
+            newBUFfer = ""
             lastOperationEquals = false;
-            break; 
+            break;
+
         case '←':
             BUFfer = BUFfer.toString();
             if (BUFfer.length === 1) {
@@ -37,9 +41,14 @@ function forSYMBOL(value) {
         case '+' :
         case '/' :
             lastOperationEquals = false;
+            newBUFfer +=value;
             handdleMATH(value);
             break;
     }
+    history();
+}
+function history(){
+    document.querySelector(".screen-a").innerText= newBUFfer ;
 }
 function handleEqualsto(){
     //dedicated fucntion for equals to sign
@@ -78,6 +87,7 @@ function mathHandling(intBUFfer) {
     }
 }
 function forNumber(value){
+    newBUFfer +=value;
     if( lastOperationEquals=== true){
         BUFfer = "0";
     }
