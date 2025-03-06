@@ -2,17 +2,32 @@ let totalBuffer=0;
 let newBUFfer="";
 let BUFfer="0";
 let previousOperator ;
+let arr_a = [];
 let lastOperationEquals = false; // this will make sure that entering any number just after a calculation resets the calcultor screen and BUFfer 
 function buttonClick(value){
-    
+    if (value==="HISTORY"){
+        showHistory();
+        return;
+    }else{
     if (isNaN(parseInt(value))){
         forSYMBOL(value);
         console.log("symbol handling");
     }else {
         forNumber(value);
         console.log("number handling");
-    }
+    }}
     screeninput();
+}
+function setHistory(newBUFfer){
+
+    let val = newBUFfer;
+    val += "=";
+    val += BUFfer;
+    arr_a.push(val);
+}
+function showHistory(){
+   
+        document.querySelector(".screen-b").innerText= arr_a;
 }
 function forSYMBOL(value) {
     
@@ -34,6 +49,7 @@ function forSYMBOL(value) {
               break;
         case '=' :
             handleEqualsto();
+            setHistory(newBUFfer);
             lastOperationEquals = true;
             break;
         case '*' :
@@ -87,10 +103,12 @@ function mathHandling(intBUFfer) {
     }
 }
 function forNumber(value){
-    newBUFfer +=value;
+    
     if( lastOperationEquals=== true){
         BUFfer = "0";
+        newBUFfer=""
     }
+    newBUFfer +=value;
     if (BUFfer ==="0") {
         BUFfer = value ;
         lastOperationEquals =false;
